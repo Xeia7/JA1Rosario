@@ -1,496 +1,723 @@
-    <!DOCTYPE html>
-    <html lang="en" class="scroll-smooth">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>JA1 Rosario | Empowering People</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            'ja1-purple': '#9333ea',
-                            'ja1-pink': '#db2777',
-                        }
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JA1 Rosario | Empowering People</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ja1-purple': '#9333ea',
+                        'ja1-pink': '#db2777',
                     }
                 }
             }
-        </script>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
-            body { font-family: 'Inter', sans-serif; }
-            .font-serif { font-family: 'Playfair Display', serif; }
-            .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-            .text-gradient { background: linear-gradient(to right, #9333ea, #db2777); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .bg-gradient-ja1 { background: linear-gradient(135deg, #9333ea, #db2777); }
-            .event-modal { display: none; }
-            .event-modal.active { display: flex; }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .text-gradient { background: linear-gradient(to right, #9333ea, #db2777); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .bg-gradient-ja1 { background: linear-gradient(135deg, #9333ea, #db2777); }
+        .event-modal { display: none; }
+        .event-modal.active { display: flex; }
+        
+        /* Custom Hover Reveal for Socials */
+        .social-hover:hover .icon-bg { transform: scale(1.1); }
+
+        /* Life Group Section Accents */
+        .lg-mesh {
+            background-image: radial-gradient(#9333ea 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+            opacity: 0.05;
+        }
+
+        @keyframes soft-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .animate-soft-pulse { animation: soft-pulse 3s infinite ease-in-out; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <nav class="fixed w-full z-50 glass">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#about" class="flex items-center space-x-2 group">
+                <div class="w-10 h-10 bg-gradient-ja1 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-105 transition">J</div>
+                <span class="font-bold text-2xl tracking-tight hidden md:block text-gradient uppercase">JA1 Rosario</span>
+            </a>
             
-            /* Custom Hover Reveal for Socials */
-            .social-hover:hover .icon-bg { transform: scale(1.1); }
-        </style>
-    </head>
-    <body class="bg-gray-50 text-gray-900">
-
-        <nav class="fixed w-full z-50 glass">
-            <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <div class="w-10 h-10 bg-gradient-ja1 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">J</div>
-                    <span class="font-bold text-2xl tracking-tight hidden md:block text-gradient uppercase">JA1 Rosario</span>
-                </div>
-                
-                <div class="hidden lg:flex space-x-8 font-medium text-sm uppercase tracking-widest">
-                    <a href="#about" class="hover:text-ja1-purple transition">About</a>
-                    <a href="#ministries" class="hover:text-ja1-purple transition">Ministries</a>
-                    <a href="#events" class="hover:text-ja1-purple transition">Events</a>
-                    <a href="#prayer" class="hover:text-ja1-purple transition">Prayer</a>
-                    <a href="#transaction" class="hover:text-ja1-purple transition">Online Transaction</a>
-                </div>
-
-                <div class="flex items-center space-x-4">
-                    <a href="#connect" class="relative group overflow-hidden bg-gray-900 text-white px-8 py-2.5 rounded-full font-bold shadow-lg transition-all duration-300 hover:shadow-purple-200">
-                        <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Connect</span>
-                        <div class="absolute inset-0 bg-gradient-ja1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-        <section class="relative h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1510590337019-5ef8d3d32116?q=80&w=2070" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gray-900/60"></div>
-            </div>
-            <div class="relative z-10 text-center text-white px-6">
-                <span class="uppercase tracking-[0.3em] text-sm mb-4 block font-semibold text-purple-300">Welcome to JA1 Rosario Church</span>
-                <h1 class="text-5xl md:text-8xl font-serif mb-6 leading-tight uppercase">Empowering People <br><span class="italic text-purple-200 uppercase">Setting the Captives Free.</span></h1>
-                <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-                    <button class="w-full md:w-auto bg-white text-ja1-purple px-10 py-4 rounded-full font-bold text-lg hover:bg-purple-50 transition">Watch Live Now</button>
-                    <a href="#events" class="w-full md:w-auto border-2 border-white/50 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition">Upcoming Events</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="max-w-7xl mx-auto px-6 -mt-16 relative z-20 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center border-b-4 border-ja1-purple">
-                <i class="fa-solid fa-calendar-check text-ja1-purple text-3xl mb-4"></i>
-                <h3 class="font-bold text-xl mb-1 uppercase tracking-wide">Next Service</h3>
-                <p class="text-ja1-pink font-bold text-2xl">Sunday 8:00 AM</p>
-            </div>
-            <div class="bg-gradient-ja1 p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center text-white">
-                <i class="fa-solid fa-location-dot text-3xl mb-4"></i>
-                <h3 class="font-bold text-xl mb-1 uppercase tracking-wide">Location</h3>
-                <p class="opacity-90">Namunga, Rosario, Batangas</p>
-            </div>
-            <div class="bg-white p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center border-b-4 border-ja1-pink">
-                <i class="fa-solid fa-heart text-ja1-pink text-3xl mb-4"></i>
-                <h3 class="font-bold text-xl mb-1 uppercase tracking-wide">Weekly Rhythm</h3>
-                <p class="text-gray-500 italic text-sm">Prayer: Tue 6PM | Youth: Fri 7PM</p>
-            </div>
-        </section>
-
-        <section id="about" class="py-24 bg-white overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="flex flex-col lg:flex-row items-center gap-16">
-                    <div class="lg:w-1/2 relative">
-                        <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
-                            <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?q=80&w=2073" alt="Church Community" class="w-full h-[500px] object-cover">
-                        </div>
-                        <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-ja1-purple/10 rounded-full -z-0 blur-3xl"></div>
-                        <div class="absolute -top-6 -left-6 border-l-8 border-t-8 border-ja1-pink w-24 h-24"></div>
-                    </div>
-
-                    <div class="lg:w-1/2">
-                        <span class="text-ja1-purple font-bold uppercase tracking-widest text-sm">Our Story</span>
-                        <h2 class="text-4xl md:text-5xl font-serif mt-4 mb-6 leading-tight">A Christ-Centered Family in <span class="text-gradient">Rosario</span></h2>
-                        <p class="text-gray-600 text-lg mb-6 leading-relaxed">
-                            Jesus the Anointed One Church (JA1) Rosario is dedicated to the transformative power of the Gospel. Our heart is to see every individual set free and empowered to live out their divine purpose within a supportive community.
-                        </p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                            <div class="flex items-start space-x-4">
-                                <div class="bg-purple-100 p-3 rounded-lg text-ja1-purple">
-                                    <i class="fa-solid fa-hands-praying"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900">Spiritual Growth</h4>
-                                    <p class="text-sm text-gray-500">Deepening our relationship with God through Word and Worship.</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-4">
-                                <div class="bg-pink-100 p-3 rounded-lg text-ja1-pink">
-                                    <i class="fa-solid fa-users-line"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900">Stronger Families</h4>
-                                    <p class="text-sm text-gray-500">Building foundations that last for generations.</p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="hidden lg:flex space-x-8 font-medium text-sm uppercase tracking-widest items-center">
+                <div class="relative group py-4">
+                    <button class="flex items-center space-x-1 hover:text-ja1-purple transition uppercase tracking-widest">
+                        <span>Grow & Serve</span>
+                        <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                    <div class="hidden group-hover:block absolute left-0 top-full w-48 bg-white border border-gray-100 shadow-xl rounded-xl py-2">
+                        <a href="#about" class="block px-4 py-2 hover:bg-purple-50 hover:text-ja1-purple transition">About Us</a>
+                        <a href="#ministries" class="block px-4 py-2 hover:bg-purple-50 hover:text-ja1-purple transition">Ministries</a>
+                        <a href="#daughter-churches" class="block px-4 py-2 hover:bg-purple-50 hover:text-ja1-purple transition">Daughter Churches</a>
                     </div>
                 </div>
+                <a href="#lifegroup" class="hover:text-ja1-purple transition">Life Groups</a>
+                <a href="#events" class="hover:text-ja1-purple transition">Events</a>
+                <a href="#prayer" class="hover:text-ja1-purple transition">Prayer</a>
+                <a href="#transaction" class="hover:text-ja1-purple transition">Online Transaction</a>
             </div>
-        </section>
 
-        <section class="py-24 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div class="bg-white p-12 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300">
-                        <div class="w-16 h-16 bg-gradient-ja1 rounded-2xl flex items-center justify-center text-white text-2xl mb-8">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                        <h3 class="text-3xl font-serif mb-4">Our Vision</h3>
-                        <p class="text-gray-600 leading-relaxed text-lg italic">
-                            "To be a global church, empowering people of all walks of life, through the preaching of the Gospel of Jesus Christ, setting the captives free."
-                        </p>
-                    </div>
-
-                    <div class="bg-white p-12 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300">
-                        <div class="w-16 h-16 bg-gradient-ja1 rounded-2xl flex items-center justify-center text-white text-2xl mb-8">
-                            <i class="fa-solid fa-bullseye"></i>
-                        </div>
-                        <h3 class="text-3xl font-serif mb-4">Our Mission</h3>
-                        <p class="text-gray-600 leading-relaxed text-lg italic">
-                            "JA1 Rosario is dedicated to transforming lives through the power of faith, community, 
-                            and spiritual restoration. We believe in the freedom found in Christ and work to help 
-                            individuals overcome bondage and discover their true purpose."
-                        </p>
-                    </div>
-                </div>
+            <div class="flex items-center space-x-4">
+                <a href="#connect" class="relative group overflow-hidden bg-gray-900 text-white px-8 py-2.5 rounded-full font-bold shadow-lg transition-all duration-300 hover:shadow-purple-200">
+                    <span class="relative z-10 text-xs tracking-[0.2em] uppercase">Connect</span>
+                    <div class="absolute inset-0 bg-gradient-ja1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <section id="events" class="bg-white py-24">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16">
-                    <div>
-                        <span class="text-ja1-pink font-bold uppercase tracking-widest text-sm">Our Calendar</span>
-                        <h2 class="text-4xl md:text-5xl font-serif mt-2">Upcoming Activities</h2>
-                    </div>
-                    <a href="#register" class="mt-4 text-ja1-purple font-bold border-b-2 border-ja1-pink pb-1">Register for an event below ↓</a>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    <div class="lg:col-span-2 space-y-8">
-                        <div onclick="openEvent('SUGOD 2026', 'Ignite the fire within the next generation. Join us for powerful worship and sessions.', 'April 15', 'Main Hall')" 
-                            class="group flex flex-col md:flex-row bg-gray-50 rounded-3xl overflow-hidden hover:shadow-xl transition-all cursor-pointer border border-transparent hover:border-purple-100">
-                            <div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                            </div>
-                            <div class="p-8 md:w-2/3">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="text-2xl font-bold text-gray-800">SUGOD 2026</h3>
-                                    <span class="bg-ja1-purple text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase">Featured</span>
-                                </div>
-                                <p class="text-ja1-pink font-semibold text-sm mb-4">April 15 • Main Hall</p>
-                                <p class="text-gray-500 text-sm line-clamp-2">A gathering of all JA1 youth in the district. Expect powerful worship, breakout sessions, and fellowship.</p>
-                                <span class="inline-block mt-4 text-ja1-purple font-bold text-sm">View Details & Sign Up →</span>
-                            </div>
-                        </div>
-
-                        <div onclick="openEvent('Worship Night', 'A sacred space for uninterrupted praise and intimate encounter with God.', 'May 02', 'Main Hall')" 
-                            class="group flex flex-col md:flex-row bg-gray-50 rounded-3xl overflow-hidden hover:shadow-xl transition-all cursor-pointer border border-transparent hover:border-purple-100">
-                            <div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?q=80&w=2044" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                            </div>
-                            <div class="p-8 md:w-2/3">
-                                <h3 class="text-2xl font-bold text-gray-800">Worship Night</h3>
-                                <p class="text-ja1-pink font-semibold text-sm mb-4">May 02 • Main Hall</p>
-                                <p class="text-gray-500 text-sm line-clamp-2">Join the JA1 Rosario Worship team for a night of praise and intercession for our nation.</p>
-                                <span class="inline-block mt-4 text-ja1-purple font-bold text-sm">View Details & Sign Up →</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-1">
-                        <div id="register" class="sticky top-32 bg-white rounded-3xl shadow-2xl p-8 border border-purple-50">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Event Registration</h3>
-                            <p class="text-gray-400 text-xs mb-6">Secure your spot for upcoming activities.</p>
-                            <form class="space-y-4">
-                                <select id="regEvent" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-ja1-purple text-sm">
-                                    <option>SUGOD 2026</option>
-                                    <option>Worship Night</option>
-                                    <option>Community Outreach</option>
-                                </select>
-                                <input type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-ja1-purple text-sm">
-                                <input type="text" placeholder="Phone Number" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-ja1-purple text-sm">
-                                <button type="button" class="w-full bg-gradient-ja1 text-white py-4 rounded-xl font-bold shadow-lg hover:opacity-90 transition">Confirm My Attendance</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1510590337019-5ef8d3d32116?q=80&w=2070" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gray-900/60"></div>
+        </div>
+        <div class="relative z-10 text-center text-white px-6">
+            <span class="uppercase tracking-[0.3em] text-sm mb-4 block font-semibold text-purple-300">Welcome to JA1 Rosario Church</span>
+            <h1 class="text-5xl md:text-8xl font-serif mb-6 leading-tight uppercase">Empowering People <br><span class="italic text-purple-200 uppercase">Setting the Captives Free.</span></h1>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+                <button class="w-full md:w-auto bg-white text-ja1-purple px-10 py-4 rounded-full font-bold text-lg hover:bg-purple-50 transition">Watch Live Now</button>
+                <a href="#events" class="w-full md:w-auto border-2 border-white/50 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition">Upcoming Events</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="prayer" class="py-24 bg-gray-50 overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-100">
-                    <div class="lg:w-2/5 bg-gray-900 relative p-12 flex flex-col justify-between text-white">
-                        <div class="absolute inset-0 opacity-40">
-                            <img src="https://images.unsplash.com/photo-1444491741275-3747c53c99b4?q=80&w=1974" class="w-full h-full object-cover">
-                        </div>
-                        <div class="relative z-10">
-                            <span class="text-purple-400 font-bold uppercase tracking-widest text-xs mb-4 block">Intercession</span>
-                            <h2 class="text-4xl font-serif mb-6 leading-tight">We Believe in the <br><span class="italic">Power of Prayer</span></h2>
-                            <p class="text-gray-300 leading-relaxed mb-8">No matter what you're walking through, you don't have to carry it alone. Our intercessors are ready to stand with you in faith.</p>
-                            
-                            <div class="space-y-6">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-purple-400">
-                                        <i class="fa-solid fa-shield-halved"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Confidential & Supportive</span>
-                                </div>
-                                <div class="flex items-center gap-4">
-                                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-purple-400">
-                                        <i class="fa-solid fa-clock-rotate-left"></i>
-                                    </div>
-                                    <span class="text-sm font-medium">Weekly Prayer Meetings</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative z-10 pt-12">
-                            <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">"Ask and it shall be given..."</p>
-                        </div>
+    <section class="max-w-7xl mx-auto px-6 -mt-16 relative z-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center border-b-4 border-ja1-purple">
+            <i class="fa-solid fa-calendar-check text-ja1-purple text-3xl mb-4"></i>
+            <h3 class="font-bold text-xl mb-1 uppercase tracking-wide">Next Service</h3>
+            <p class="text-ja1-pink font-bold text-2xl">Sunday 8:00 AM</p>
+        </div>
+        <div class="bg-gradient-ja1 p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center text-white">
+            <i class="fa-solid fa-location-dot text-3xl mb-4"></i>
+            <h3 class="font-bold text-xl mb-1 uppercase tracking-wide">Location</h3>
+            <p class="opacity-90">Namunga, Rosario, Batangas</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow-2xl flex flex-col items-center text-center border-b-4 border-ja1-pink">
+            <i class="fa-solid fa-heart text-ja1-pink text-3xl mb-4"></i>
+            <h3 class="font-bold text-xl mb-1 uppercase tracking-wide">Weekly Rhythm</h3>
+            <p class="text-gray-500 italic text-sm">Prayer: Tue 6PM | Youth: Fri 7PM</p>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 relative">
+                    <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+                        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?q=80&w=2073" alt="Church Community" class="w-full h-[500px] object-cover">
                     </div>
+                    <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-ja1-purple/10 rounded-full -z-0 blur-3xl"></div>
+                    <div class="absolute -top-6 -left-6 border-l-8 border-t-8 border-ja1-pink w-24 h-24"></div>
+                </div>
+
+                <div class="lg:w-1/2">
+                    <span class="text-ja1-purple font-bold uppercase tracking-widest text-sm">Our Story</span>
+                    <h2 class="text-4xl md:text-5xl font-serif mt-4 mb-6 leading-tight">A Christ-Centered Family in <a href="#about" class="text-gradient">Rosario</a></h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+                        Jesus the Anointed One Church (JA1) Rosario is dedicated to the transformative power of the Gospel. Our heart is to see every individual set free and empowered to live out their divine purpose within a supportive community.
+                    </p>
                     
-                    <div class="lg:w-3/5 p-12 md:p-16">
-                        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="md:col-span-1">
-                                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Name / Alias</label>
-                                <input type="text" placeholder="Your name" class="w-full px-5 py-4 rounded-2xl bg-gray-50 border border-gray-100 outline-none focus:ring-2 focus:ring-ja1-purple transition-all text-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-purple-100 p-3 rounded-lg text-ja1-purple">
+                                <i class="fa-solid fa-hands-praying"></i>
                             </div>
-                            <div class="md:col-span-1">
-                                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Category</label>
-                                <select class="w-full px-5 py-4 rounded-2xl bg-gray-50 border border-gray-100 outline-none focus:ring-2 focus:ring-ja1-purple transition-all text-sm appearance-none">
-                                    <option>General Petition</option>
-                                    <option>Healing & Health</option>
-                                    <option>Financial Breakthrough</option>
-                                    <option>Family Restoration</option>
-                                    <option>Spiritual Growth</option>
-                                    <option>Thanksgiving</option>
-                                </select>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Spiritual Growth</h4>
+                                <p class="text-sm text-gray-500">Deepening our relationship with God through Word and Worship.</p>
                             </div>
-                            <div class="md:col-span-2">
-                                <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Your Prayer Request</label>
-                                <textarea rows="5" placeholder="How can we pray for you today?" class="w-full px-5 py-4 rounded-2xl bg-gray-50 border border-gray-100 outline-none focus:ring-2 focus:ring-ja1-purple transition-all text-sm resize-none"></textarea>
-                                <div class="flex justify-between mt-2">
-                                    <p class="text-[10px] text-gray-400 italic">This request will be shared with our intercessory team.</p>
-                                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">0 / 2000</span>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="bg-pink-100 p-3 rounded-lg text-ja1-pink">
+                                <i class="fa-solid fa-users-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Stronger Families</h4>
+                                <p class="text-sm text-gray-500">Building foundations that last for generations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="lifegroup" class="relative py-32 bg-white overflow-hidden">
+        <div class="absolute top-0 inset-x-0 h-[700px] bg-gradient-to-br from-ja1-purple via-ja1-purple to-ja1-pink -skew-y-3 origin-top-right scale-110"></div>
+        <div class="absolute inset-0 lg-mesh pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                
+                <div class="lg:w-5/12 text-white">
+                    <div class="inline-block px-4 py-1 rounded-full bg-white/10 backdrop-blur-md mb-6 border border-white/20">
+                        <span class="uppercase tracking-[0.2em] text-xs font-bold">Community Matters</span>
+                    </div>
+                    <h2 class="text-5xl md:text-6xl font-serif leading-tight mb-8">
+                        Experience <br>
+                        <span class="italic text-purple-200">Real Life</span> 
+                        <br>Together.
+                    </h2>
+                    <p class="text-white/80 text-lg mb-10 leading-relaxed max-w-md">
+                        A Life Group is more than just a meeting; it's a family. Dive deep into the Word and build friendships that last a lifetime at JA1 Rosario.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition cursor-default">
+                            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shadow-lg">
+                                <i class="fa-solid fa-link text-sm"></i>
+                            </div>
+                            <span class="font-semibold tracking-wide">Meaningful Connections</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition cursor-default">
+                            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shadow-lg">
+                                <i class="fa-solid fa-shield-heart text-sm"></i>
+                            </div>
+                            <span class="font-semibold tracking-wide">Spiritual Accountability</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition cursor-default">
+                            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shadow-lg">
+                                <i class="fa-solid fa-seedling text-sm"></i>
+                            </div>
+                            <span class="font-semibold tracking-wide">Safe place for growth</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-7/12 w-full">
+                    <div class="bg-white/95 backdrop-blur-xl rounded-[3rem] p-8 md:p-12 shadow-[0_50px_100px_-20px_rgba(147,51,234,0.3)] border border-gray-100 relative">
+                        <div class="absolute -top-8 -right-8 w-24 h-24 bg-gradient-ja1 rounded-3xl rotate-12 flex items-center justify-center text-white text-3xl shadow-2xl hidden md:flex">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div class="mb-10">
+                            <h3 class="text-3xl font-serif text-gray-900 mb-2">Join Life Group</h3>
+                            <p class="text-gray-500">Fill out the details below and we'll help you find your tribe.</p>
+                        </div>
+
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Full Name</label>
+                                    <input type="text" placeholder="e.g. Juan Dela Cruz" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-ja1-purple focus:ring-4 focus:ring-ja1-purple/10 outline-none transition-all text-sm">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Age</label>
+                                        <input type="number" placeholder="12" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-ja1-purple focus:ring-4 focus:ring-ja1-purple/10 outline-none transition-all text-sm">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Gender</label>
+                                        <select class="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-ja1-purple focus:ring-4 focus:ring-ja1-purple/10 outline-none transition-all text-sm appearance-none">
+                                            <option value="">Select</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="md:col-span-2 flex items-center gap-3 py-2">
-                                <input type="checkbox" id="anon" class="w-4 h-4 rounded text-ja1-purple focus:ring-ja1-purple">
-                                <label for="anon" class="text-sm text-gray-500">I prefer to keep this request anonymous in public service.</label>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Civil Status</label>
+                                    <select class="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-ja1-purple focus:ring-4 focus:ring-ja1-purple/10 outline-none transition-all text-sm appearance-none">
+                                        <option value="">Status</option>
+                                        <option>Single</option>
+                                        <option>Married</option>
+                                        <option>Widowed</option>
+                                        <option>Single Parent</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Contact Number</label>
+                                    <input type="text" placeholder="09XX XXX XXXX" class="w-full px-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-ja1-purple focus:ring-4 focus:ring-ja1-purple/10 outline-none transition-all text-sm">
+                                </div>
                             </div>
-                            <div class="md:col-span-2">
-                                <button type="submit" class="w-full bg-gradient-ja1 text-white py-5 rounded-2xl font-bold shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
-                                    <span>Submit Prayer Request</span>
-                                    <i class="fa-solid fa-paper-plane text-xs opacity-70"></i>
-                                </button>
+
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Social Media</label>
+                                <div class="relative">
+                                    <i class="fa-brands fa-facebook-messenger absolute left-6 top-1/2 -translate-y-1/2 text-ja1-purple text-lg"></i>
+                                    <input type="text" placeholder="Facebook Profile / Messenger Name" class="w-full pl-14 pr-6 py-4 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-ja1-purple focus:ring-4 focus:ring-ja1-purple/10 outline-none transition-all text-sm">
+                                </div>
                             </div>
+
+                            <button type="submit" class="w-full group relative overflow-hidden bg-gray-900 text-white py-5 rounded-2xl font-bold shadow-xl transition-all hover:shadow-2xl">
+                                <span class="relative z-10 flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
+                                    Submit Details
+                                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                </span>
+                                <div class="absolute inset-0 bg-gradient-ja1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="ministries" class="max-w-7xl mx-auto px-6 py-24 border-t border-gray-100">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-serif text-gray-900 mb-4 uppercase">Get Involved</h2>
-                <p class="text-gray-500 max-w-xl mx-auto">Discover a place where you can grow, serve, and belong.</p>
-            </div>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="group relative rounded-2xl overflow-hidden aspect-square shadow-md">
-                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition">
-                    <div class="absolute inset-0 bg-gradient-to-t from-ja1-purple/90 to-transparent flex items-end p-6">
-                        <span class="text-white font-bold">Worship Team</span>
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="bg-white p-12 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-ja1 rounded-2xl flex items-center justify-center text-white text-2xl mb-8">
+                        <i class="fa-solid fa-eye"></i>
                     </div>
+                    <h3 class="text-3xl font-serif mb-4">Our Vision</h3>
+                    <p class="text-gray-600 leading-relaxed text-lg italic">
+                        "To be a global church, empowering people of all walks of life, through the preaching of the Gospel of Jesus Christ, setting the captives free."
+                    </p>
                 </div>
-                <div class="group relative rounded-2xl overflow-hidden aspect-square shadow-md">
-                    <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition">
-                    <div class="absolute inset-0 bg-gradient-to-t from-ja1-pink/90 to-transparent flex items-end p-6">
-                        <span class="text-white font-bold">Anointed Youth</span>
+
+                <div class="bg-white p-12 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-ja1 rounded-2xl flex items-center justify-center text-white text-2xl mb-8">
+                        <i class="fa-solid fa-bullseye"></i>
                     </div>
-                </div>
-                <div class="group relative rounded-2xl overflow-hidden aspect-square shadow-md">
-                    <img src="https://images.unsplash.com/photo-1484662020986-75935d2ebc66?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition">
-                    <div class="absolute inset-0 bg-gradient-to-t from-ja1-purple/90 to-transparent flex items-end p-6">
-                        <span class="text-white font-bold">Anointed Young Pro</span>
-                    </div>
-                </div>
-                <div class="group relative rounded-2xl overflow-hidden aspect-square shadow-md">
-                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition">
-                    <div class="absolute inset-0 bg-gradient-to-t from-ja1-pink/90 to-transparent flex items-end p-6">
-                        <span class="text-white font-bold">Cell Groups</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="transaction" class="bg-gray-900 py-24">
-            <div class="max-w-4xl mx-auto px-6 text-center text-white">
-                <h2 class="text-4xl font-serif mb-6 uppercase">Partner with JA1 Rosario</h2>
-                <p class="text-gray-400 text-lg mb-10">Your generosity empowers our missions and local community projects in Rosario, Batangas.</p>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl"><p class="text-xs font-bold text-purple-300">GCASH</p></div>
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl"><p class="text-xs font-bold text-purple-300">MAYA</p></div>
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl"><p class="text-xs font-bold text-purple-300">BANK</p></div>
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl"><p class="text-xs font-bold text-purple-300">OFFICE</p></div>
-                </div>
-
-                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
-                    <button class="w-full md:w-auto bg-gradient-ja1 text-white px-12 py-4 rounded-full font-bold text-lg shadow-xl hover:scale-105 transition">
-                        Online Transaction (PHP)
-                    </button>
-                    <button onclick="toggleSteps()" class="w-full md:w-auto border-2 border-purple-500/50 text-purple-300 px-10 py-4 rounded-full font-bold text-lg hover:bg-purple-500/10 transition flex items-center justify-center gap-2">
-                        How to Transfer <i id="chevron" class="fa-solid fa-chevron-down text-sm"></i>
-                    </button>
-                </div>
-
-                <div id="transferDropdown" class="hidden max-w-xl mx-auto mt-10 bg-white rounded-3xl p-8 text-left text-gray-800 shadow-2xl border border-purple-100">
-                    <h4 class="text-ja1-purple font-bold uppercase tracking-widest text-sm mb-6">Transfer Instructions</h4>
-                    <div class="space-y-6">
-                        <div class="flex gap-4">
-                            <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-ja1-purple rounded-full flex items-center justify-center font-bold text-sm">1</span>
-                            <p class="text-sm leading-relaxed">Open your GCash, Maya, or Bank App and choose the transfer option.</p>
-                        </div>
-                        <div class="flex gap-4">
-                            <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-ja1-purple rounded-full flex items-center justify-center font-bold text-sm">2</span>
-                            <p class="text-sm leading-relaxed">Enter the current official account details provided by the church office.</p>
-                        </div>
-                        <div class="flex gap-4">
-                            <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-ja1-purple rounded-full flex items-center justify-center font-bold text-sm">3</span>
-                            <p class="text-sm leading-relaxed">In the <strong>Reference/Notes</strong>, please put your Name and the Type of giving (e.g., "Juan Dela Cruz - Tithes").</p>
-                        </div>
-                        <div class="flex gap-4">
-                            <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-ja1-purple rounded-full flex items-center justify-center font-bold text-sm">4</span>
-                            <p class="text-sm leading-relaxed">Take a screenshot of the confirmation and send it to our official Facebook page or email for recording.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="connect" class="py-32 bg-white text-center px-6 relative overflow-hidden">
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-5 pointer-events-none">
-                <div class="absolute top-10 left-10 w-96 h-96 bg-ja1-purple rounded-full blur-[120px]"></div>
-                <div class="absolute bottom-10 right-10 w-96 h-96 bg-ja1-pink rounded-full blur-[120px]"></div>
-            </div>
-
-            <div class="max-w-4xl mx-auto relative z-10">
-                <span class="text-ja1-purple font-bold uppercase tracking-[0.4em] text-xs mb-6 block">Stay in touch</span>
-                <h2 class="text-5xl md:text-6xl font-serif text-gray-900 mb-8 italic">Connect With Us</h2>
-                
-                <div class="group relative inline-block mb-24">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-ja1-purple to-ja1-pink rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-                    <div class="relative bg-white border border-gray-100 px-8 py-6 md:px-16 md:py-10 rounded-2xl shadow-sm">
-                        <p class="text-[10px] uppercase tracking-[0.5em] text-gray-400 mb-2 font-bold text-center">Official Email</p>
-                        <a href="mailto:ja1rosarioofficial@gmail.com" class="text-2xl md:text-4xl font-light tracking-tight text-gray-800 hover:text-ja1-purple transition-colors duration-500 break-all">
-                            ja1rosarioofficial@gmail.com
-                        </a>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-12 items-center">
-                    <a href="https://www.youtube.com/@JA1Rosario" target="_blank" class="group flex flex-col items-center">
-                        <div class="relative w-16 h-16 mb-4">
-                            <div class="absolute inset-0 bg-gray-100 rounded-full group-hover:bg-[#ff0000] group-hover:scale-110 transition-all duration-500"></div>
-                            <div class="relative flex items-center justify-center h-full text-gray-400 group-hover:text-white transition-colors duration-500">
-                                <i class="fa-brands fa-youtube text-2xl"></i>
-                            </div>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400 group-hover:text-gray-900 transition-colors">YouTube</span>
-                    </a>
-
-                    <a href="https://www.facebook.com/ja1rosario" target="_blank" class="group flex flex-col items-center">
-                        <div class="relative w-16 h-16 mb-4">
-                            <div class="absolute inset-0 bg-gray-100 rounded-full group-hover:bg-[#1877F2] group-hover:scale-110 transition-all duration-500"></div>
-                            <div class="relative flex items-center justify-center h-full text-gray-400 group-hover:text-white transition-colors duration-500">
-                                <i class="fa-brands fa-facebook-f text-2xl"></i>
-                            </div>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400 group-hover:text-gray-900 transition-colors">Facebook</span>
-                    </a>
-
-                    <a href="https://www.tiktok.com/@ja1rosario" target="_blank" class="group flex flex-col items-center">
-                        <div class="relative w-16 h-16 mb-4">
-                            <div class="absolute inset-0 bg-gray-100 rounded-full group-hover:bg-black group-hover:scale-110 transition-all duration-500"></div>
-                            <div class="relative flex items-center justify-center h-full text-gray-400 group-hover:text-white transition-colors duration-500">
-                                <i class="fa-brands fa-tiktok text-2xl"></i>
-                            </div>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400 group-hover:text-gray-900 transition-colors">TikTok</span>
-                    </a>
-
-                    <a href="#" class="group flex flex-col items-center">
-                        <div class="relative w-16 h-16 mb-4">
-                            <div class="absolute inset-0 bg-gray-100 rounded-full group-hover:bg-[#1DB954] group-hover:scale-110 transition-all duration-500"></div>
-                            <div class="relative flex items-center justify-center h-full text-gray-400 group-hover:text-white transition-colors duration-500">
-                                <i class="fa-brands fa-spotify text-2xl"></i>
-                            </div>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400 group-hover:text-gray-900 transition-colors">Spotify</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <footer class="bg-white py-12 px-6 border-t border-gray-100 text-center">
-            <div class="text-2xl font-bold text-gradient uppercase tracking-tighter mb-4">JA1 Rosario</div>
-            <p class="text-gray-400 text-xs tracking-widest uppercase">© 2026 Jesus the Anointed One Church Rosario. Batangas, Philippines.</p>
-        </footer>
-
-        <div id="eventPage" class="event-modal fixed inset-0 z-[100] bg-white overflow-y-auto hidden">
-            <button onclick="closeEvent()" class="fixed top-8 right-8 z-[110] w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-ja1-pink hover:text-white transition shadow-lg">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-            <div class="flex flex-col md:flex-row h-full">
-                <div class="md:w-1/2 bg-gray-900">
-                    <img id="mImg" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069" class="w-full h-full object-cover opacity-60">
-                </div>
-                <div class="md:w-1/2 p-12 md:p-24 flex flex-col justify-center">
-                    <span class="text-ja1-pink font-bold uppercase tracking-[0.3em] text-sm mb-4">Event Details</span>
-                    <h2 id="mTitle" class="text-5xl font-serif mb-6">Event Title</h2>
-                    <div class="flex space-x-6 mb-8 text-gray-500 font-bold text-sm uppercase">
-                        <span><i class="fa-solid fa-calendar mr-2 text-ja1-purple"></i> <span id="mDate">Date</span></span>
-                        <span><i class="fa-solid fa-location-dot mr-2 text-ja1-purple"></i> <span id="mLoc">Location</span></span>
-                    </div>
-                    <p id="mDesc" class="text-gray-600 text-lg leading-relaxed mb-10">Description here...</p>
-                    <a href="#register" onclick="closeEvent()" class="bg-gradient-ja1 text-white py-4 px-10 rounded-xl font-bold shadow-lg w-max inline-block text-center">Register for this Event</a>
+                    <h3 class="text-3xl font-serif mb-4">Our Mission</h3>
+                    <p class="text-gray-600 leading-relaxed text-lg italic">
+                        "JA1 Rosario is dedicated to transforming lives through the power of faith, community, 
+                        and spiritual restoration. We believe in the freedom found in Christ and work to help 
+                        individuals overcome bondage and discover their true purpose."
+                    </p>
                 </div>
             </div>
         </div>
+    </section>
 
-        <script>
-            function toggleSteps() {
-                const dropdown = document.getElementById('transferDropdown');
-                const chevron = document.getElementById('chevron');
-                dropdown.classList.toggle('hidden');
-                chevron.classList.toggle('fa-chevron-down');
-                chevron.classList.toggle('fa-chevron-up');
-            }
+    <section id="events" class="bg-white py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div>
+                    <span class="text-ja1-pink font-bold uppercase tracking-widest text-sm">Our Calendar</span>
+                    <h2 class="text-4xl md:text-5xl font-serif mt-2">Upcoming Activities</h2>
+                </div>
+                <a href="#register" class="mt-4 text-ja1-purple font-bold border-b-2 border-ja1-pink pb-1">Register for an event below ↓</a>
+            </div>
 
-            function openEvent(title, desc, date, loc) {
-                document.getElementById('mTitle').innerText = title;
-                document.getElementById('mDesc').innerText = desc;
-                document.getElementById('mDate').innerText = date;
-                document.getElementById('mLoc').innerText = loc;
-                document.getElementById('eventPage').classList.remove('hidden');
-                document.getElementById('eventPage').classList.add('active');
-                document.body.style.overflow = 'hidden';
-                const select = document.getElementById('regEvent');
-                if(select) select.value = title;
-            }
+            <div class="mb-12 bg-purple-50 rounded-3xl p-6 md:p-8 border border-purple-100 flex flex-col md:flex-row items-center justify-between gap-6 animate-soft-pulse">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-ja1-purple rounded-full flex items-center justify-center text-white shadow-lg">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <p class="text-gray-700 font-medium">Get updated with church events, join our <span class="font-bold text-ja1-purple">Announcements Community</span>.</p>
+                </div>
+                <a href="https://m.me/ch/AbY37N7XAIgwkKz4/?send_source=cm:copy_invite_link" target="_blank" class="bg-ja1-purple text-white px-8 py-3 rounded-xl font-bold text-sm hover:bg-ja1-pink transition-colors shadow-md">
+                    Proceed to Link
+                </a>
+            </div>
 
-            function closeEvent() {
-                document.getElementById('eventPage').classList.add('hidden');
-                document.getElementById('eventPage').classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        </script>
-    </body>
-    </html>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-2 space-y-8">
+                    <div onclick="openEvent('SUGOD 2026', 'Ignite the fire within the next generation. Join us for powerful worship and sessions.', 'April 15', 'Main Hall')" 
+                        class="group flex flex-col md:flex-row bg-gray-50 rounded-3xl overflow-hidden hover:shadow-xl transition-all cursor-pointer border border-transparent hover:border-purple-100">
+                        <div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-8 md:w-2/3">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-2xl font-bold text-gray-800">SUGOD 2026</h3>
+                                <span class="bg-ja1-purple text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase">Featured</span>
+                            </div>
+                            <p class="text-ja1-pink font-semibold text-sm mb-4">April 15 • Main Hall</p>
+                            <p class="text-gray-500 text-sm line-clamp-2">A gathering of all JA1 youth in the district. Expect powerful worship, breakout sessions, and fellowship.</p>
+                            <span class="inline-block mt-4 text-ja1-purple font-bold text-sm">View Details & Sign Up →</span>
+                        </div>
+                    </div>
+
+                    <div onclick="openEvent('Worship Night', 'A sacred space for uninterrupted praise and intimate encounter with God.', 'May 02', 'Main Hall')" 
+                        class="group flex flex-col md:flex-row bg-gray-50 rounded-3xl overflow-hidden hover:shadow-xl transition-all cursor-pointer border border-transparent hover:border-purple-100">
+                        <div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?q=80&w=2044" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-8 md:w-2/3">
+                            <h3 class="text-2xl font-bold text-gray-800">Worship Night</h3>
+                            <p class="text-ja1-pink font-semibold text-sm mb-4">May 02 • Main Hall</p>
+                            <p class="text-gray-500 text-sm line-clamp-2">Join the JA1 Rosario Worship team for a night of praise and intercession for our nation.</p>
+                            <span class="inline-block mt-4 text-ja1-purple font-bold text-sm">View Details & Sign Up →</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1">
+                    <div id="register" class="sticky top-32 bg-white rounded-3xl shadow-2xl p-8 border border-purple-50">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Event Registration</h3>
+                        <p class="text-gray-400 text-xs mb-6">Secure your spot for upcoming activities.</p>
+                        <form class="space-y-4">
+                            <select id="regEvent" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-ja1-purple text-sm">
+                                <option>SUGOD 2026</option>
+                                <option>Worship Night</option>
+                                <option>Community Outreach</option>
+                            </select>
+                            <input type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-ja1-purple text-sm">
+                            <input type="text" placeholder="Phone Number" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-ja1-purple text-sm">
+                            <button type="button" class="w-full bg-gradient-ja1 text-white py-4 rounded-xl font-bold shadow-lg hover:opacity-90 transition">Confirm My Attendance</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prayer" class="py-24 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-100">
+                <div class="lg:w-2/5 bg-gray-900 relative p-12 flex flex-col justify-between text-white">
+                    <div class="absolute inset-0 opacity-40">
+                        <img src="https://images.unsplash.com/photo-1444491741275-3747c53c99b4?q=80&w=1974" class="w-full h-full object-cover">
+                    </div>
+                    <div class="relative z-10">
+                        <span class="text-purple-400 font-bold uppercase tracking-widest text-xs mb-4 block">Intercession</span>
+                        <h2 class="text-4xl font-serif mb-6 leading-tight">We Believe in the <br><span class="italic">Power of Prayer</span></h2>
+                        <p class="text-gray-300 leading-relaxed mb-8">No matter what you're walking through, you don't have to carry it alone. Our intercessors are ready to stand with you in faith.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-purple-400">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <span class="text-sm font-medium">Confidential & Supportive</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-purple-400">
+                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                </div>
+                                <span class="text-sm font-medium">Weekly Prayer Meetings</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative z-10 pt-12">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">"Ask and it shall be given..."</p>
+                    </div>
+                </div>
+                
+                <div class="lg:w-3/5 p-12 md:p-16">
+                    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-1">
+                            <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Name / Alias</label>
+                            <input type="text" placeholder="Your name" class="w-full px-5 py-4 rounded-2xl bg-gray-50 border border-gray-100 outline-none focus:ring-2 focus:ring-ja1-purple transition-all text-sm">
+                        </div>
+                        <div class="md:col-span-1">
+                            <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Category</label>
+                            <select class="w-full px-5 py-4 rounded-2xl bg-gray-50 border border-gray-100 outline-none focus:ring-2 focus:ring-ja1-purple transition-all text-sm appearance-none">
+                                <option>General Petition</option>
+                                <option>Healing & Health</option>
+                                <option>Financial Breakthrough</option>
+                                <option>Family Restoration</option>
+                                <option>Spiritual Growth</option>
+                                <option>Thanksgiving</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Your Prayer Request</label>
+                            <textarea rows="5" placeholder="How can we pray for you today?" class="w-full px-5 py-4 rounded-2xl bg-gray-50 border border-gray-100 outline-none focus:ring-2 focus:ring-ja1-purple transition-all text-sm resize-none"></textarea>
+                            <div class="flex justify-between mt-2">
+                                <p class="text-[10px] text-gray-400 italic">This request will be shared with our intercessory team.</p>
+                                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">0 / 2000</span>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2 flex items-center gap-3 py-2">
+                            <input type="checkbox" id="anon" class="w-4 h-4 rounded text-ja1-purple focus:ring-ja1-purple">
+                            <label for="anon" class="text-sm text-gray-500">I prefer to keep this request anonymous in public service.</label>
+                        </div>
+                        <div class="md:col-span-2">
+                            <button type="submit" class="w-full bg-gradient-ja1 text-white py-5 rounded-2xl font-bold shadow-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
+                                <span>Submit Prayer Request</span>
+                                <i class="fa-solid fa-paper-plane text-xs opacity-70"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ministries" class="max-w-7xl mx-auto px-6 py-24 border-t border-gray-100">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-serif text-gray-900 mb-4 uppercase">Get Involved</h2>
+            <p class="text-gray-500 max-w-xl mx-auto">Discover a place where you can grow, serve, and belong.</p>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="group relative rounded-2xl overflow-hidden aspect-square shadow-md">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-gradient-to-t from-ja1-purple/90 to-transparent flex items-end p-6">
+                    <span class="text-white font-bold">Worship Team</span>
+                </div>
+            </div>
+            <div class="group relative rounded-2xl overflow-hidden aspect-square shadow-md">
+                <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-gradient-to-t from-ja1-pink/90 to-transparent flex items-end p-6">
+                    <span class="text-white font-bold">Anointed Youth</span>
+                </div>
+            </div>
+            <div class="group relative rounded-2xl overflow-hidden aspect-square shadow-md">
+                <img src="https://images.unsplash.com/photo-1484662020986-75935d2ebc66?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-gradient-to-t from-ja1-purple/90 to-transparent flex items-end p-6">
+                    <span class="text-white font-bold">Anointed Young Pro</span>
+                </div>
+            </div>
+            <div class="group relative rounded-2xl overflow-hidden aspect-square shadow-md">
+                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070" class="w-full h-full object-cover group-hover:scale-110 transition">
+                <div class="absolute inset-0 bg-gradient-to-t from-ja1-pink/90 to-transparent flex items-end p-6">
+                    <span class="text-white font-bold">Cell Groups</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="daughter-churches" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+            <div>
+                <span class="text-ja1-purple font-bold uppercase tracking-[0.4em] text-xs mb-4 block">Our Expanding Network</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-gray-900 uppercase">Daughter <span class="text-gradient italic text-ja1-pink">Churches</span></h2>
+            </div>
+            <div class="hidden md:block text-right">
+                <p class="text-gray-400 text-sm font-medium uppercase tracking-widest">Select a church to connect</p>
+                <div class="h-1 w-20 bg-gradient-ja1 ml-auto mt-2 rounded-full"></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div class="group relative bg-white rounded-3xl p-1 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-ja1-purple group-hover:bg-[#B31B1B] group-hover:text-white transition-colors duration-500">
+                            <i class="fa-solid fa-location-crosshairs text-xl"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Mainland Luzon</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-ja1-purple transition-colors">JA1 Laguna</h3>
+                    <p class="text-sm text-gray-500 mt-1">Calamba City, Laguna</p>
+                </div>
+
+                <div class="absolute inset-0 bg-white/95 backdrop-blur-md translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center justify-center p-6 text-center">
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#B31B1B] mb-6">Connect with Laguna</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#1877F2] hover:text-white transition-all">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#ff0000] hover:text-white transition-all">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                    </div>
+                    <button class="mt-8 text-[10px] font-bold uppercase border-b-2 border-ja1-purple pb-1 hover:text-ja1-pink hover:border-ja1-pink transition-colors">Visit Local Site</button>
+                </div>
+            </div>
+
+            <div class="group relative bg-white rounded-3xl p-1 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-ja1-pink group-hover:bg-[#B31B1B] group-hover:text-white transition-colors duration-500">
+                            <i class="fa-solid fa-location-crosshairs text-xl"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">Southern Tagalog</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 group-hover:text-ja1-purple transition-colors">JA1 Cavite</h3>
+                    <p class="text-sm text-gray-500 mt-1">Dasmariñas, Cavite</p>
+                </div>
+                <div class="absolute inset-0 bg-white/95 backdrop-blur-md translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex flex-col items-center justify-center p-6 text-center">
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#B31B1B] mb-6">Connect with Cavite</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[#1877F2] hover:text-white transition-all">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-black hover:text-white transition-all">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                    </div>
+                    <button class="mt-8 text-[10px] font-bold uppercase border-b-2 border-ja1-purple pb-1 transition-colors">Visit Local Site</button>
+                </div>
+            </div>
+
+            </div>
+
+        <div class="mt-16 text-center">
+            <p class="text-gray-400 text-sm">Don't see your local district? <a href="#connect" class="text-ja1-purple font-bold border-b border-ja1-purple/20 hover:text-[#B31B1B] transition-colors">Contact our Main Office</a></p>
+        </div>
+    </div>
+</section>
+
+    <section id="transaction" class="bg-gray-900 py-24">
+        <div class="max-w-4xl mx-auto px-6 text-center text-white">
+            <h2 class="text-4xl font-serif mb-6 uppercase">Partner with <a href="#about" class="hover:text-ja1-purple transition">JA1 Rosario</a></h2>
+            <p class="text-gray-400 text-lg mb-10">Your generosity empowers our missions and local community projects in Rosario, Batangas.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                <div class="p-6 bg-white/5 border border-white/10 rounded-2xl"><p class="text-xs font-bold text-purple-300">GCASH</p></div>
+                <div class="p-6 bg-white/5 border border-white/10 rounded-2xl"><p class="text-xs font-bold text-purple-300">MAYA</p></div>
+                <div class="p-6 bg-white/5 border border-white/10 rounded-2xl"><p class="text-xs font-bold text-purple-300">BANK</p></div>
+                <div class="p-6 bg-white/5 border border-white/10 rounded-2xl"><p class="text-xs font-bold text-purple-300">OFFICE</p></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                <button class="w-full md:w-auto bg-gradient-ja1 text-white px-12 py-4 rounded-full font-bold text-lg shadow-xl hover:scale-105 transition">
+                    Online Transaction (PHP)
+                </button>
+                <button onclick="toggleSteps()" class="w-full md:w-auto border-2 border-purple-500/50 text-purple-300 px-10 py-4 rounded-full font-bold text-lg hover:bg-purple-500/10 transition flex items-center justify-center gap-2">
+                    How to Transfer <i id="chevron" class="fa-solid fa-chevron-down text-sm"></i>
+                </button>
+            </div>
+
+            <div id="transferDropdown" class="hidden max-w-xl mx-auto mt-10 bg-white rounded-3xl p-8 text-left text-gray-800 shadow-2xl border border-purple-100">
+                <h4 class="text-ja1-purple font-bold uppercase tracking-widest text-sm mb-6">Transfer Instructions</h4>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-ja1-purple rounded-full flex items-center justify-center font-bold text-sm">1</span>
+                        <p class="text-sm leading-relaxed">Open your GCash, Maya, or Bank App and choose the transfer option.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-ja1-purple rounded-full flex items-center justify-center font-bold text-sm">2</span>
+                        <p class="text-sm leading-relaxed">Enter the current official account details provided by the church office.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-ja1-purple rounded-full flex items-center justify-center font-bold text-sm">3</span>
+                        <p class="text-sm leading-relaxed">In the <strong>Reference/Notes</strong>, please put your Name and the Type of giving (e.g., "Juan Dela Cruz - Tithes").</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 bg-purple-100 text-ja1-purple rounded-full flex items-center justify-center font-bold text-sm">4</span>
+                        <p class="text-sm leading-relaxed">Take a screenshot of the confirmation and send it to our official Facebook page or email for recording.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="connect" class="py-32 bg-white text-center px-6 relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-5 pointer-events-none">
+            <div class="absolute top-10 left-10 w-96 h-96 bg-ja1-purple rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-ja1-pink rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <span class="text-ja1-purple font-bold uppercase tracking-[0.4em] text-xs mb-6 block">Stay in touch</span>
+            <h2 class="text-5xl md:text-6xl font-serif text-gray-900 mb-8 italic">Connect With Us</h2>
+            
+            <div class="group relative inline-block mb-24">
+                <div class="absolute -inset-1 bg-gradient-to-r from-ja1-purple to-ja1-pink rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div class="relative bg-white border border-gray-100 px-8 py-6 md:px-16 md:py-10 rounded-2xl shadow-sm">
+                    <p class="text-[10px] uppercase tracking-[0.5em] text-gray-400 mb-2 font-bold text-center">Official Email</p>
+                    <a href="mailto:ja1rosarioofficial@gmail.com" class="text-2xl md:text-4xl font-light tracking-tight text-gray-800 hover:text-ja1-purple transition-colors duration-500 break-all">
+                        ja1rosarioofficial@gmail.com
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 items-center">
+                <a href="https://www.youtube.com/@JA1Rosario" target="_blank" class="group flex flex-col items-center">
+                    <div class="relative w-16 h-16 mb-4">
+                        <div class="absolute inset-0 bg-gray-100 rounded-full group-hover:bg-[#ff0000] group-hover:scale-110 transition-all duration-500"></div>
+                        <div class="relative flex items-center justify-center h-full text-gray-400 group-hover:text-white transition-colors duration-500">
+                            <i class="fa-brands fa-youtube text-2xl"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400 group-hover:text-gray-900 transition-colors">YouTube</span>
+                </a>
+
+                <a href="https://www.facebook.com/ja1rosario" target="_blank" class="group flex flex-col items-center">
+                    <div class="relative w-16 h-16 mb-4">
+                        <div class="absolute inset-0 bg-gray-100 rounded-full group-hover:bg-[#1877F2] group-hover:scale-110 transition-all duration-500"></div>
+                        <div class="relative flex items-center justify-center h-full text-gray-400 group-hover:text-white transition-colors duration-500">
+                            <i class="fa-brands fa-facebook-f text-2xl"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400 group-hover:text-gray-900 transition-colors">Facebook</span>
+                </a>
+
+                <a href="https://www.tiktok.com/@ja1rosario" target="_blank" class="group flex flex-col items-center">
+                    <div class="relative w-16 h-16 mb-4">
+                        <div class="absolute inset-0 bg-gray-100 rounded-full group-hover:bg-black group-hover:scale-110 transition-all duration-500"></div>
+                        <div class="relative flex items-center justify-center h-full text-gray-400 group-hover:text-white transition-colors duration-500">
+                            <i class="fa-brands fa-tiktok text-2xl"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400 group-hover:text-gray-900 transition-colors">TikTok</span>
+                </a>
+
+                <a href="#" class="group flex flex-col items-center">
+                    <div class="relative w-16 h-16 mb-4">
+                        <div class="absolute inset-0 bg-gray-100 rounded-full group-hover:bg-[#1DB954] group-hover:scale-110 transition-all duration-500"></div>
+                        <div class="relative flex items-center justify-center h-full text-gray-400 group-hover:text-white transition-colors duration-500">
+                            <i class="fa-brands fa-spotify text-2xl"></i>
+                        </div>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest font-bold text-gray-400 group-hover:text-gray-900 transition-colors">Spotify</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white py-12 px-6 border-t border-gray-100 text-center">
+        <a href="#about" class="text-2xl font-bold text-gradient uppercase tracking-tighter mb-4 inline-block hover:scale-105 transition">JA1 Rosario</a>
+        <p class="text-gray-400 text-xs tracking-widest uppercase">© 2026 Jesus the Anointed One Church <a href="#about">Rosario</a>. Batangas, Philippines.</p>
+    </footer>
+
+    <div id="eventPage" class="event-modal fixed inset-0 z-[100] bg-white overflow-y-auto hidden">
+        <button onclick="closeEvent()" class="fixed top-8 right-8 z-[110] w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-ja1-pink hover:text-white transition shadow-lg">
+            <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+        <div class="flex flex-col md:flex-row h-full">
+            <div class="md:w-1/2 bg-gray-900">
+                <img id="mImg" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069" class="w-full h-full object-cover opacity-60">
+            </div>
+            <div class="md:w-1/2 p-12 md:p-24 flex flex-col justify-center">
+                <span class="text-ja1-pink font-bold uppercase tracking-[0.3em] text-sm mb-4">Event Details</span>
+                <h2 id="mTitle" class="text-5xl font-serif mb-6">Event Title</h2>
+                <div class="flex space-x-6 mb-8 text-gray-500 font-bold text-sm uppercase">
+                    <span><i class="fa-solid fa-calendar mr-2 text-ja1-purple"></i> <span id="mDate">Date</span></span>
+                    <span><i class="fa-solid fa-location-dot mr-2 text-ja1-purple"></i> <span id="mLoc">Location</span></span>
+                </div>
+                <p id="mDesc" class="text-gray-600 text-lg leading-relaxed mb-10">Description here...</p>
+                <a href="#register" onclick="closeEvent()" class="bg-gradient-ja1 text-white py-4 px-10 rounded-xl font-bold shadow-lg w-max inline-block text-center">Register for this Event</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSteps() {
+            const dropdown = document.getElementById('transferDropdown');
+            const chevron = document.getElementById('chevron');
+            dropdown.classList.toggle('hidden');
+            chevron.classList.toggle('fa-chevron-down');
+            chevron.classList.toggle('fa-chevron-up');
+        }
+
+        function openEvent(title, desc, date, loc) {
+            document.getElementById('mTitle').innerText = title;
+            document.getElementById('mDesc').innerText = desc;
+            document.getElementById('mDate').innerText = date;
+            document.getElementById('mLoc').innerText = loc;
+            document.getElementById('eventPage').classList.remove('hidden');
+            document.getElementById('eventPage').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            const select = document.getElementById('regEvent');
+            if(select) select.value = title;
+        }
+
+        function closeEvent() {
+            document.getElementById('eventPage').classList.add('hidden');
+            document.getElementById('eventPage').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
